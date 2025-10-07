@@ -1,6 +1,5 @@
 package com.felp.springuser.entities;
 
-import ch.qos.logback.core.joran.spi.NoAutoStart;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
