@@ -2,6 +2,7 @@ package com.felp.springuser.config;
 
 import com.felp.springuser.entities.Order;
 import com.felp.springuser.entities.User;
+import com.felp.springuser.entities.enums.OrderStatus;
 import com.felp.springuser.repositories.OrderRepository;
 import com.felp.springuser.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,9 +37,9 @@ public class TestConfig implements CommandLineRunner {
         User u10 = new User(null, "Linda Purple", "linda@gmail.com", "999999999", "123456");
 
 
-        Order o1 = new Order(null, Instant.parse("2019-06-20T19:53:07Z"), u1);
-        Order o2 = new Order(null, Instant.parse("2019-07-21T03:42:10Z"), u2);
-        Order o3 = new Order(null, Instant.parse("2019-07-22T15:21:22Z"), u1);
+        Order o1 = new Order(null, Instant.parse("2019-06-20T19:53:07Z"), OrderStatus.PAID, u1);
+        Order o2 = new Order(null, Instant.parse("2019-07-21T03:42:10Z"), OrderStatus.WAITING_PAYMENT, u2);
+        Order o3 = new Order(null, Instant.parse("2019-07-22T15:21:22Z"), OrderStatus.WAITING_PAYMENT, u1);
 
         userRepository.saveAll(Arrays.asList(u1, u2, u3, u4, u5, u6, u7, u8, u9, u10));
 
