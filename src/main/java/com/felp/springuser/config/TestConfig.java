@@ -1,8 +1,10 @@
 package com.felp.springuser.config;
 
+import com.felp.springuser.entities.Category;
 import com.felp.springuser.entities.Order;
 import com.felp.springuser.entities.User;
 import com.felp.springuser.entities.enums.OrderStatus;
+import com.felp.springuser.repositories.CategoryRepository;
 import com.felp.springuser.repositories.OrderRepository;
 import com.felp.springuser.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +25,15 @@ public class TestConfig implements CommandLineRunner {
     @Autowired
     private OrderRepository orderRepository;
 
+    @Autowired
+    private CategoryRepository categoryRepository;
+
     @Override
     public void run(String... args) throws Exception {
+        Category cat1 = new Category(null, "Electronics");
+        Category cat2 = new Category(null, "Books");
+        Category cat3 = new Category(null, "Computers");
+
         User u1 = new User(null, "Maria Brown", "maria@gmail.com", "988888888", "123456");
         User u2 = new User(null, "Alex Green", "alex@gmail.com", "977777777", "123456");
         User u3 = new User(null, "Bob Grey", "bob@gmail.com", "966666666", "123456");
@@ -44,5 +53,7 @@ public class TestConfig implements CommandLineRunner {
         userRepository.saveAll(Arrays.asList(u1, u2, u3, u4, u5, u6, u7, u8, u9, u10));
 
         orderRepository.saveAll(Arrays.asList(o1, o2, o3));
+
+        categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
     }
 }
