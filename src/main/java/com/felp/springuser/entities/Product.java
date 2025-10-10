@@ -29,8 +29,9 @@ public class Product implements Serializable {
     // O uso do 'Set' não permite que tenha categorias repetidas
     // Ele precisa ser instanciado porque a coleção nao pode ser nula
     // 'Set' é apenas uma interface, então a gente usa 'HashSet' para que poçamos usar apenas uma classe correspondente a interface
-    @Transient
-    private Set<Category> categories = new HashSet<Category>();
+    @ManyToMany
+    @JoinTable(name = "tb_product_category", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private final Set<Category> categories = new HashSet<Category>();
 
     public Product(Long id, String name, String description, Double price, String imgUrl) {
         this.id = id;
@@ -83,8 +84,8 @@ public class Product implements Serializable {
         this.imgUrl = imgUrl;
     }
 
-    public void setCategories(Set<Category> categories) {
-        this.categories = categories;
+    public Set<Category> getCategories() {
+        return categories;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.felp.springuser.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serial;
@@ -20,8 +21,9 @@ public class Category implements Serializable {
 
     private String name;
 
-    @Transient
-    private Set<Product> products = new HashSet<>();
+    @ManyToMany(mappedBy = "categories")
+    @JsonIgnore
+    private final Set<Product> products = new HashSet<>();
 
     public Category(Long id, String name) {
         this.id = id;
@@ -45,8 +47,8 @@ public class Category implements Serializable {
         this.name = name;
     }
 
-    public void setProducts(Set<Product> products) {
-        this.products = products;
+    public Set<Product> getProducts() {
+        return products;
     }
 
     @Override
