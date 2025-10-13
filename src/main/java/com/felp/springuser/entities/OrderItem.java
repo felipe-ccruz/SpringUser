@@ -1,5 +1,6 @@
 package com.felp.springuser.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.felp.springuser.entities.pk.OrderItemPK;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.EmbeddedId;
@@ -17,7 +18,7 @@ public class OrderItem implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @EmbeddedId
-    private OrderItemPK id;
+    private final OrderItemPK id = new OrderItemPK();
 
     private Integer quantity;
 
@@ -31,7 +32,7 @@ public class OrderItem implements Serializable {
     }
     public OrderItem(){}
 
-
+    @JsonIgnore
     public Order getOrder() {
         return id.getOrder();
     }
