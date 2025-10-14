@@ -32,6 +32,11 @@ public class OrderItem implements Serializable {
     }
     public OrderItem(){}
 
+    //METHOD
+    public Double getSubtotal(){
+        return price * quantity;
+    }
+
     //GETTER & SETTER
     @JsonIgnore
     public Order getOrder() {
