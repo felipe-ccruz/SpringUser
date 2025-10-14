@@ -42,63 +42,51 @@ public class Order implements Serializable {
         setOrderStatus(orderStatus);
         this.client = client;
     }
-
-
-    //GETTER & SETTER
     public Order() {
     }
 
+    //GETTER & SETTER
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
-
     public Instant getMoment() {
         return moment;
     }
-
     public void setMoment(Instant moment) {
         this.moment = moment;
     }
-
     public User getClient() {
         return client;
     }
-
     public void setClient(User client) {
         this.client = client;
     }
-
     public OrderStatus getOrderStatus() {
         return OrderStatus.valueOf(orderStatus);
     }
-
     public void setOrderStatus(OrderStatus orderStatus) {
         if (orderStatus != null) this.orderStatus = orderStatus.getCode();
     }
-
     public Set<OrderItem> getItems() {
         return items;
     }
-
     public Payment getPayment() {
         return payment;
     }
-
     public void setPayment(Payment payment) {
         this.payment = payment;
     }
 
+    //HASHCODE & EQUALS
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Order order = (Order) o;
         return Objects.equals(id, order.id);
     }
-
     @Override
     public int hashCode() {
         return Objects.hashCode(id);

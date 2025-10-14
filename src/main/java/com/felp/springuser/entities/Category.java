@@ -31,26 +31,24 @@ public class Category implements Serializable {
     }
     public Category() {}
 
+    //GETTER & SETTER
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
-
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
-
     public Set<Product> getProducts() {
         return products;
     }
 
+    //HASHCODE & EQUALS
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
