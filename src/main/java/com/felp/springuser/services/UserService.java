@@ -2,8 +2,11 @@ package com.felp.springuser.services;
 
 import com.felp.springuser.entities.User;
 import com.felp.springuser.repositories.UserRepository;
+import com.felp.springuser.services.exceptions.DatabaseException;
 import com.felp.springuser.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -30,7 +33,15 @@ public class UserService {
     }
 
     public void delete(Long id) {
-        userRepository.deleteById(id);
+        try {
+            User user = userRepository.findById(id)
+                    .orElseThrow(() -> new ResourceNotFoundException(id));
+
+            userRepository.delete(user);
+
+        } catch (DataIntegrityViolationException e) {
+            throw new DatabaseException(e.getMessage());
+        }
     }
 
     public User update(Long id, User user) {
